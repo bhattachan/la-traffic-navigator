@@ -6,7 +6,7 @@ const FX_UI = "'Plus Jakarta Sans', system-ui, sans-serif";
 const FX_NUM = "'Space Grotesk', system-ui, sans-serif";
 
 // ── ARRIVAL + PARKING ─────────────────────────────────────────
-function ArrivalScreen({ T, insetTop = 54, insetBottom = 30, tweaks }) {
+function ArrivalScreen({ T, insetTop = 54, insetBottom = 30, tweaks, onDone }) {
   const [selected, setSelected] = React.useState(null);
 
   const lots = [
@@ -97,7 +97,7 @@ function ArrivalScreen({ T, insetTop = 54, insetBottom = 30, tweaks }) {
               <Icon name="walk" size={20} color={T.accentInk} /> Walk to Parking
             </button>
           ) : (
-            <button style={{
+            <button onClick={onDone} style={{
               width: "100%", height: 52, marginTop: 12, border: `1px solid ${T.line}`, borderRadius: 16, cursor: "pointer",
               background: "rgba(255,255,255,0.04)", color: T.inkMute, fontWeight: 700, fontSize: 15, fontFamily: FX_UI,
             }}>

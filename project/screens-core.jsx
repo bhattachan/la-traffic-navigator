@@ -36,14 +36,14 @@ function SheetHandle({ T }) {
 }
 
 // ── HOME / LIVE MAP ───────────────────────────────────────────
-function HomeScreen({ T, insetTop = 54, insetBottom = 30, tweaks, onSearch, onReport }) {
+function HomeScreen({ T, insetTop = 54, insetBottom = 30, tweaks, onSearch, onReport, onSaved, onSettings }) {
   const cats = [
     { i: "home", l: "Home", s: "18 min" },
     { i: "work", l: "Work", s: "26 min" },
     { i: "gas", l: "Gas" },
     { i: "park", l: "Parking" },
     { i: "plug", l: "EV" },
-    { i: "star", l: "Saved" },
+    { i: "star", l: "Saved", action: onSaved },
   ];
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: T.bg, fontFamily: F_UI }}>
@@ -59,12 +59,12 @@ function HomeScreen({ T, insetTop = 54, insetBottom = 30, tweaks, onSearch, onRe
           <button onClick={onSearch} style={{ flex: 1, textAlign: "left", background: "none", border: "none", color: T.inkMute, fontSize: 16, fontFamily: F_UI, cursor: "pointer" }}>Where to?</button>
           <div style={{ width: 1, height: 22, background: T.line }} />
           <button onClick={onSearch} style={{ width: 40, height: 40, borderRadius: 12, border: "none", background: "transparent", color: T.ink, display: "grid", placeItems: "center", cursor: "pointer" }}><Icon name="mic" size={20} /></button>
-          <div style={{ width: 38, height: 38, borderRadius: "50%", background: "linear-gradient(135deg,#2b3647,#161b24)", border: `1px solid ${T.line}`, display: "grid", placeItems: "center", color: T.accent, fontWeight: 800, fontFamily: F_NUM, fontSize: 15 }}>A</div>
+          <button onClick={onSettings} style={{ width: 38, height: 38, borderRadius: "50%", background: "linear-gradient(135deg,#2b3647,#161b24)", border: `1px solid ${T.line}`, display: "grid", placeItems: "center", color: T.accent, fontWeight: 800, fontFamily: F_NUM, fontSize: 15, cursor: "pointer" }}>A</button>
         </Glass>
         {/* category chips */}
         <div style={{ display: "flex", gap: 8, marginTop: 10, overflowX: "auto", paddingBottom: 2, scrollbarWidth: "none" }}>
           {cats.map((c, i) => (
-            <Chip key={i} theme={T} style={{ flexShrink: 0 }}>
+            <Chip key={i} theme={T} style={{ flexShrink: 0 }} onClick={c.action}>
               <Icon name={c.i} size={16} color={T.accent} stroke={2.2} />
               <span>{c.l}</span>
               {c.s && <span style={{ color: T.inkMute, fontWeight: 600 }}>· {c.s}</span>}
