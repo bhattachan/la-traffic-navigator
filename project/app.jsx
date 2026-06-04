@@ -2,7 +2,9 @@
 // device screens + platform toggle + Tweaks panel + the live nav animation.
 // Globals used: DesignCanvas, DCSection, DCArtboard, useTweaks, TweaksPanel,
 // Tweak*, makeTheme, StatusChrome, HomeScreen, SearchScreen,
-// RoutePreviewScreen, NavigationScreen, ReportScreen, SCREEN_W, SCREEN_H, INSETS
+// RoutePreviewScreen, NavigationScreen, ReportScreen, ArrivalScreen,
+// SavedPlacesScreen, SettingsScreen, TripOverviewScreen,
+// SCREEN_W, SCREEN_H, INSETS
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "platform": "ios",
@@ -76,6 +78,27 @@ function App() {
 
           <DCArtboard id="report" label="Report · Waze-style" width={SCREEN_W} height={SCREEN_H} style={abStyle}>
             <Frame><ReportScreen {...SP} progress={0.46} onClose={() => {}} /></Frame>
+          </DCArtboard>
+
+        </DCSection>
+
+        <DCSection id="extended" title="Extended Screens"
+          subtitle="Arrival · Saved places · Settings · Trip overview & share">
+
+          <DCArtboard id="arrival" label="Arrival · parking" width={SCREEN_W} height={SCREEN_H} style={abStyle}>
+            <Frame><ArrivalScreen {...SP} /></Frame>
+          </DCArtboard>
+
+          <DCArtboard id="saved" label="Saved places" width={SCREEN_W} height={SCREEN_H} style={abStyle}>
+            <Frame><SavedPlacesScreen {...SP} /></Frame>
+          </DCArtboard>
+
+          <DCArtboard id="settings" label="Settings" width={SCREEN_W} height={SCREEN_H} style={abStyle}>
+            <Frame><SettingsScreen T={T} insetTop={ins.top} insetBottom={ins.bottom} /></Frame>
+          </DCArtboard>
+
+          <DCArtboard id="trip-overview" label="Trip overview · share" width={SCREEN_W} height={SCREEN_H} style={abStyle}>
+            <Frame><TripOverviewScreen {...SP} /></Frame>
           </DCArtboard>
 
         </DCSection>
